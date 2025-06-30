@@ -33,13 +33,13 @@ public class Main extends Application {
 		//adicionar um cliente ao banco de dados
 		cliente.setNomeCliente("Alfredo");
 		cliente.setCpfCliente("78967843299");
-		cliente.setDataNasc("2001-05-22");
-		cliente.setTelefone("63992897645");
+		cliente.setDataNasc("2000-05-22");
+		cliente.setTelefone("63992898987");
 		cliente.setEmail("alfredo@gmail.com");
-		cliente.setEndereco("Rua dos maxixes");
-		cliente.setGenero("M");
+		cliente.setEndereco("Rua das rapaduras");
+		cliente.setGenero("P");
 		
-		clienteDAO.create(cliente);
+		clienteDAO.delete("89012345678");
 		
 		launch(args);
 	}

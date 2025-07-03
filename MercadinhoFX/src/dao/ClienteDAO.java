@@ -45,6 +45,7 @@ public class ClienteDAO {
 	}
 	
 	}
+	//
 	
 	public ArrayList<Cliente> read() {
 		Connection con = ConnectionDatabase.getConnection();
@@ -81,6 +82,7 @@ public class ClienteDAO {
 		return clientes;//por enquanto, para não dar erro
 		
 	}
+	//
 	
     public void update(Cliente cliente) {
     	Connection con = ConnectionDatabase.getConnection();
@@ -111,6 +113,7 @@ public class ClienteDAO {
 		}
     	
     }
+    //
 	
     public void delete(String cpf) {
     	Connection con = ConnectionDatabase.getConnection();
@@ -131,5 +134,46 @@ public class ClienteDAO {
 			ConnectionDatabase.closeConnection(con, stmt);
 		}
     }
+    
+    //COpiei e colei de read
+    public ArrayList<Cliente> search(String pesquisa) {// método recebe String para pesquisar no banco de dados
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs= null;
+		ArrayList<Cliente> clientes = new ArrayList<>();//irá guardar a lista de cliente 
+		
+		try {
+			stmt = con.prepareStatement("SELECT * FROM Cliente where nomeCliente like ? or cpfCliente like ?");//String de pesquisa
+			stmt.setString(1, "%" +pesquisa+ "%"); //a % é para pesquisa qualquer coisa que digitei referente aos "?"
+			stmt.setString(2, "%" +pesquisa+ "%");
+			
+			rs = stmt.executeQuery();
+			// laço de repetição para aparecer a lista de uma vez
+			
+			while(rs.next()) {
+				Cliente cliente = new Cliente();
+				cliente.setIdCliente(rs.getString("idCliente"));
+				cliente.setNomeCliente(rs.getString("nomeCliente"));
+				cliente.setCpfCliente(rs.getString("cpfCliente"));
+				cliente.setDataNasc(rs.getString("dataNasc"));
+				cliente.setTelefone(rs.getString("telefone"));
+				cliente.setEmail(rs.getString("email"));
+				cliente.setEndereco(rs.getString("endereco"));
+				cliente.setGenero(rs.getString("genero"));
+				
+				clientes.add(cliente);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Erro ao ler informações!", e);
+		}finally {
+			ConnectionDatabase.closeConnection(con, stmt, rs);
+		}
+		
+		return clientes;//por enquanto, para não dar erro
+		
+	}
+	
     
 }

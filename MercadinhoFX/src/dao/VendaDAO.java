@@ -80,8 +80,7 @@ public class VendaDAO {
 	    	//deu erro tem que colocar dentro de uma try catch 
 	    	try {
 				stmt =con.prepareStatement("UPDATE Venda SET idCliente =?, idFuncionario = ?, "
-						+ "valorTotal =?, quantTotal = ?, dataVenda = ?,"
-						+ "where idVenda = ?");//string, não adiciona o idCliente porque é imutavel
+						+ "valorTotal =?, quantTotal = ?, dataVenda = ? where idVenda = ?");//string, não adiciona o idCliente porque é imutavel
 				//vai utilizar cpdfCliente para indicar a atualizar "where cpfCliente"
 				stmt.setString(1, venda.getIdCliente());
 				stmt.setString(2, venda.getIdFuncionario());
@@ -107,7 +106,7 @@ public class VendaDAO {
 	    	PreparedStatement stmt = null;
 	    	
 	    	try {
-				stmt = con.prepareStatement("DELETE FROM Produto where idVenda = ?");
+				stmt = con.prepareStatement("DELETE FROM Venda where idVenda = ?");
 				stmt.setString(1,idVenda);
 				
 				stmt.execute();

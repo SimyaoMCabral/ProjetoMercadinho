@@ -167,5 +167,73 @@ public class ProdutoDAO {
 			return produtos;//por enquanto, para não dar erro
 			
 		}
+	    
+	    public ArrayList<Produto> readProdAV() {
+			Connection con = ConnectionDatabase.getConnection();
+			PreparedStatement stmt = null;
+			ResultSet rs= null;
+			ArrayList<Produto> produtos = new ArrayList<>();//irá guardar a lista de cliente 
+			
+			try {
+				stmt = con.prepareStatement("SELECT * FROM VW_ProdutoAVencer");
+				rs = stmt.executeQuery();
+				int i = 1;
+				// laço de repetição para aparecer a lista de uma vez
+				
+				while(rs.next()) {
+					Produto produto = new Produto();
+					produto.setIdProduto(""+i);
+					
+					produto.setNomeProduto(rs.getString("nomeProduto"));
+					produto.setCodBarra(rs.getString("codBarra"));
+					produto.setTipoUnit(rs.getString("tipoUnit"));
+					produto.setDataVal(rs.getString("dataVal"));
+					produtos.add(produto);
+					i++;// para adicionar o valores 
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException("Erro ao ler informações!", e);
+			}finally {
+				ConnectionDatabase.closeConnection(con, stmt, rs);
+			}
+			
+			return produtos;//por enquanto, para não dar erro
+			
+		}
+	    
+	    public ArrayList<Produto> readProdEB() {
+			Connection con = ConnectionDatabase.getConnection();
+			PreparedStatement stmt = null;
+			ResultSet rs= null;
+			ArrayList<Produto> produtos = new ArrayList<>();//irá guardar a lista de cliente 
+			
+			try {
+				stmt = con.prepareStatement("SELECT * FROM VW_EstoqueBaixo");
+				rs = stmt.executeQuery();
+				int i = 1;
+				// laço de repetição para aparecer a lista de uma vez
+				
+				while(rs.next()) {
+					Produto produto = new Produto();
+					produto.setIdProduto(""+i);
+					
+					produto.setNomeProduto(rs.getString("nomeProduto"));
+					produto.setCodBarra(rs.getString("codBarra"));
+					produto.setTipoUnit(rs.getString("tipoUnit"));
+					produto.setEstoque(rs.getString("estoque"));
+					produtos.add(produto);
+					i++;// para adicionar o valores 
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException("Erro ao ler informações!", e);
+			}finally {
+				ConnectionDatabase.closeConnection(con, stmt, rs);
+			}
+			
+			return produtos;//por enquanto, para não dar erro
+			
+		}
 	
 }

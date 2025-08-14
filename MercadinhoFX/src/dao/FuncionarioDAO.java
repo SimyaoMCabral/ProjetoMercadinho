@@ -17,7 +17,7 @@ public class FuncionarioDAO {
 		//COMO É UMA TENTATIVA DE CONEXÃO FOI PRECISO FAZER AS INFROMAÇÕES ABAIXO "TRY CATCH"
 		
 		try {
-			stmt= con.prepareStatement("INSERT INTO Funcionario values(?, ?, ?, ?, ?, ?, ?, ?, ?)");//a interrogação é um espaço reservado que é reconhecido pelo prepareStatement
+			stmt= con.prepareStatement("INSERT INTO Funcionario values(?, ?, ?, ?, ?, ?, ?, ?, ?,?)");//a interrogação é um espaço reservado que é reconhecido pelo prepareStatement
 			stmt.setString(1, funcionario.getNomeFuncionario());
 			stmt.setString(2, funcionario.getCpfFuncionario());
 			stmt.setString(3, funcionario.getDataNasc());
@@ -27,6 +27,7 @@ public class FuncionarioDAO {
 			stmt.setString(7, funcionario.getGenero());
 			stmt.setString(8, funcionario.getCargo());
 			stmt.setString(9, funcionario.getNivel());
+			stmt.setString(10, funcionario.getSenha());
 			///acima estão na ordem de cada espaço vazio que será preenchido
 			
 			stmt.execute();
@@ -65,6 +66,7 @@ public class FuncionarioDAO {
 					funcionario.setGenero(rs.getString("endereco"));
 					funcionario.setCargo(rs.getString("cargo"));
 					funcionario.setNivel(rs.getString("nivel"));
+					funcionario.setSenha(rs.getString("senha"));
 					funcionarios.add(funcionario);
 					
 				}
@@ -87,8 +89,8 @@ public class FuncionarioDAO {
 	    	//deu erro tem que colocar dentro de uma try catch 
 	    	try {
 				stmt =con.prepareStatement("UPDATE Funcionario SET nomeFuncionario =?, cpfFuncionario = ?, dataNasc = ?,"
-						+ " telefone = ?, email = ?, endereco = ?, genero =?, cargo =?, nivel =? "
-						+ "where cpfFuncionario = ?");//string, não adiciona o idCliente porque é imutavel
+						+ " telefone = ?, email = ?, endereco = ?, genero =?, cargo =?, nivel =?,  "
+						+ "senha = ? where cpfFuncionario = ?");//string, não adiciona o idCliente porque é imutavel
 				//vai utilizar cpdfCliente para indicar a atualizar "where cpfCliente"
 				stmt.setString(1, funcionario.getNomeFuncionario());
 				stmt.setString(2, funcionario.getCpfFuncionario());
@@ -99,10 +101,11 @@ public class FuncionarioDAO {
 				stmt.setString(7, funcionario.getGenero());
 				stmt.setString(8, funcionario.getCargo());
 				stmt.setString(9, funcionario.getNivel());
-				stmt.setString(10, funcionario.getCpfFuncionario());
+				stmt.setString(10, funcionario.getSenha());
+				stmt.setString(11, funcionario.getCpfFuncionario());
 				
-				stmt.execute();//para executar o comando
-				System.out.println("Cliente atualizado!");
+				stmt.executeUpdate();//para executar o comando
+				System.out.println("Funcionario atualizado!");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				throw new RuntimeException("Erro ao atualizar!", e);
@@ -160,6 +163,7 @@ public class FuncionarioDAO {
 					funcionario.setGenero(rs.getString("genero"));
 					funcionario.setCargo(rs.getString("cargo"));
 					funcionario.setNivel(rs.getString("nivel"));
+					funcionario.setSenha(rs.getString("senha"));
 					
 					
 					funcionarios.add(funcionario);
@@ -175,6 +179,73 @@ public class FuncionarioDAO {
 			return funcionarios;//por enquanto, para não dar erro
 			
 		}
+	    
+	    public Funcionario autenticarUser(String user, String password) {// método de autenticação
+			Connection con = ConnectionDatabase.getConnection();
+			PreparedStatement stmt = null;
+			ResultSet rs= null;
+			Funcionario funcionario = new Funcionario();
+			
+			try {
+				stmt = con.prepareStatement("SELECT * FROM Funcionario where cpfFuncionario = ? and senha = ?");//String de pesquisa
+				stmt.setString(1,user); //a % é para pesquisa qualquer coisa que digitei referente aos "?"
+				stmt.setString(2, password);
+				
+				rs = stmt.executeQuery();
+				// laço de repetição para aparecer a lista de uma vez
+				
+				while(rs.next()) {
+					funcionario.setIdFuncionario(rs.getString("idFuncionario"));
+					funcionario.setNomeFuncionario(rs.getString("nomeFuncionario"));
+					funcionario.setCpfFuncionario(rs.getString("cpfFuncionario"));
+					funcionario.setDataNasc(rs.getString("dataNasc"));
+					funcionario.setTelefone(rs.getString("telefone"));
+					funcionario.setEmail(rs.getString("email"));
+					funcionario.setEndereco(rs.getString("endereco"));
+					funcionario.setGenero(rs.getString("genero"));
+					funcionario.setCargo(rs.getString("cargo"));
+					funcionario.setNivel(rs.getString("nivel"));
+					funcionario.setSenha(rs.getString("senha"));
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException("Erro ao ler informações!", e);
+			}finally {
+				ConnectionDatabase.closeConnection(con, stmt, rs);
+			}
+			
+			return funcionario;//por enquanto, para não dar erro
+			
+		}
 		
+	    public String  readTotalVendido(String cpf) {
+			Connection con = ConnectionDatabase.getConnection();
+			PreparedStatement stmt = null;
+			ResultSet rs= null;
+			String totalVendido = null;//irá guardar a lista de cliente 
+			
+			try {
+				stmt = con.prepareStatement("select f.nomeFuncionario, SUM(valorTotal) as totalVendido"
+						+ " from Funcionario f, Venda v" //tem quer colocar espaço em " from.."
+						+ " where f.idFuncionario = v.idFuncionario and cpfFuncionario = ? group by f.nomeFuncionario"); //tem quer colocar espaço em " where.."
+				stmt.setString(1, cpf);
+				rs = stmt.executeQuery();
+				// laço de repetição para aparecer a lista de uma vez
+				//Continuação da aula de ontem falta fazer algumas alterações
+				while(rs.next()) {
+					totalVendido = rs.getString("totalVendido");
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException("Erro ao ler informações!", e);
+			}finally {
+				ConnectionDatabase.closeConnection(con, stmt, rs);
+			}
+			
+			return totalVendido;//por enquanto, para não dar erro
+			
+		}
 	
 }

@@ -1,5 +1,6 @@
 package application;
 	
+import java.io.IOException;
 import java.sql.Connection;
 
 
@@ -9,121 +10,125 @@ import connectionFactory.ConnectionDatabase;
 import dao.ProdutoDAO;
 import dao.VendaDAO;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Produto;
 import model.Venda;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
+	
+	private static Stage stage;
+	private static Scene main;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			stage = primaryStage;
+			Parent fxmlLogin = FXMLLoader.load(getClass().getResource("/view/viewLogin.fxml"));
+			main = new Scene(fxmlLogin);//nesse método não consio fzer modificação porque inicia com a tela
+			
+			stage.setTitle("Tela de login");
+			stage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/Casa.png")));
+			
+			primaryStage.setScene(main);//para tela rodar
+			primaryStage.show(); //exibir a tela
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main(String[] args) {
-		//criando objetos
-		Venda venda = new Venda();
-		VendaDAO vendaDAO = new VendaDAO();//envia as informações
-		ArrayList<Venda>vendas=new ArrayList<>();//tem que ter ArrayList para funcionar
-			
-		
-		//CREATE
-		
-//		venda.setIdCliente("19");
-//		venda.setIdFuncionario("36");
-//		venda.setValorTotal("500");
-//		venda.setQuantTotal("2");
-//		venda.setDataVenda("2025-07-03");
-//		venda.setDataFab("2023-09-25");
-//		venda.setDataVal("2027-09-25");
-		
-//		vendaDAO.create(venda);
-		
-		
-		//READ
-		
-//		vendas = vendaDAO.read();
-//		for (int i= 0; i<vendas.size();i++) {// começa da linha/casa zero i=0 e vai até ter a ultima quantidade de clintes "i<clientes.size"
-//			venda = vendas.get(i);//se não tiver ArrayList da erro (clientes,funcionarios,produtos)
-		    
-//				System.out.print("| |");
-//				System.out.print(venda.getIdVenda());
-//				System.out.print(" | ");
-//				System.out.print(venda.getIdCliente());
-//				System.out.print(" | ");
-//				System.out.print(venda.getIdFuncionario());
-//				System.out.print(" | ");
-//				System.out.print(venda.getValorTotal());
-//				System.out.print(" | ");
-//				System.out.print(venda.getQuantTotal());
-//				System.out.print(" | ");
-//				System.out.print(venda.getDataVenda());
-//				System.out.print(" | ");
-//				System.out.print(venda.getDataFab());
-//				System.out.print(" | ");
-//				System.out.print(venda.getDataVal());
-//				System.out.print(" | ");
-//				System.out.println("");
-		
-//		}	
-		
-		
-		//UPATE
-		
-//		venda.setIdVenda("10");
-//		venda.setIdCliente("17");
-//		venda.setIdFuncionario("35");
-//		venda.setValorTotal("100.00");
-//		venda.setQuantTotal("600");
-//		venda.setDataVenda("2023-09-26");
-//		venda.setDataVal("2027-11-25");
-////		cliente.setCargo("Gerente");
-////		cliente.setNivel("10");
-		
-//		vendaDAO.update(venda);
-		
-		//DELETE
-		
-//		vendaDAO.delete("10");//Se tentar deletar cliente com venda da erro
-		
-		
-		//SEARCH
-	
-//	vendas = vendaDAO.search("4");
-//		
-//		for (int i= 0; i<vendas.size();i++) {// começa da linha/casa zero i=0 e vai até ter a ultima quantidade de clintes "i<clientes.size"
-//			venda = vendas.get(i);//armazena cliente e as informações
-//		//os clientes tem que es tar na mesma linha por isso não usa println
-//		
-//		System.out.print(" | | ");
-//		System.out.print(venda.getIdVenda());
-//		System.out.print(" | ");
-//		System.out.print(venda.getIdCliente());
-//		System.out.print(" | ");
-//		System.out.print(venda.getIdFuncionario());
-//		System.out.print(" | ");
-//		System.out.print(venda.getValorTotal());
-//		System.out.print(" | ");
-//		System.out.print(venda.getQuantTotal());
-//		System.out.print(" | ");
-//		System.out.print(venda.getDataVenda());
-//		System.out.print(" | ");
-//		System.out.println("");
-//		
-//		}
-		
-		
-		
-		launch(args);
+	//método para fazer voltar para tela de logim
+	public static void TelaLogin() throws IOException {
+		FXMLLoader fxmlLogin = new FXMLLoader();
+		fxmlLogin.setLocation(Main.class.getResource("/view/viewLogin.fxml"));
+		Parent TelaLogin = fxmlLogin.load();
+		main = new Scene(TelaLogin);
+		stage.setTitle("Tela de login");
+		stage.setScene(main);
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.show();
 	}
+	
+	//Método de transição de tela
+	public static void TelaHome() throws IOException {
+		FXMLLoader fxmlHome = new FXMLLoader();//nesse método consigo fazer modificações
+		fxmlHome.setLocation(Main.class.getResource("/view/viewMainMenu.fxml"));
+		Parent TelaHome = fxmlHome.load();
+		main = new Scene(TelaHome);
+		stage.setTitle("Mercadinho - Menu principal");
+		stage.setScene(main);
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.show();
+	}
+		
+	
+	public static void TelaCliente() throws IOException {
+		FXMLLoader fxmlCliente = new FXMLLoader();//nesse método consigo fazer modificações
+		fxmlCliente.setLocation(Main.class.getResource("/view/viewRelatorioClientes.fxml"));
+		Parent TelaCliente = fxmlCliente.load();
+		main = new Scene(TelaCliente);
+		stage.setTitle("Mercadinho - Relatorio de clientes");
+		stage.setScene(main);
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.show();
+	}
+	
+	public static void TelaProduto() throws IOException {
+		FXMLLoader fxmlProduto = new FXMLLoader();//nesse método consigo fazer modificações
+		fxmlProduto.setLocation(Main.class.getResource("/view/viewRelatorioProdutos.fxml"));
+		Parent TelaProduto = fxmlProduto.load();
+		main = new Scene(TelaProduto);
+		stage.setTitle("Mercadinho - Relatorio de Produtos");
+		stage.setScene(main);
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.show();
+	}
+	
+	private static Stage cadCliente;
+	public static void TelaCadastroClin() throws IOException{
+		FXMLLoader ClienteCadastro = new FXMLLoader();
+		ClienteCadastro.setLocation(Main.class.getResource("/View/viewCadastroCliente.fxml"));
+		Parent cadastroClin = ClienteCadastro.load();
+		Scene scene2 = new Scene(cadastroClin);
+		
+		cadCliente = new Stage();
+		cadCliente.setTitle("Cadastro/Edição de Cliente");
+		cadCliente.initModality(Modality.WINDOW_MODAL);
+		cadCliente.setScene(scene2);
+		cadCliente.centerOnScreen();
+		cadCliente.showAndWait();
+	}
+	
+	private static Stage cadProduto;
+	public static void TelaCadastroProd() throws IOException{
+		FXMLLoader ProdutoCadastro = new FXMLLoader();
+		ProdutoCadastro.setLocation(Main.class.getResource("/View/viewCadastroProduto.fxml"));
+		Parent cadastroProd = ProdutoCadastro.load();
+		Scene scene2 = new Scene(cadastroProd);
+		
+		cadProduto = new Stage();
+		cadProduto.setTitle("Cadastro/Edição de Produto");
+		cadProduto.initModality(Modality.WINDOW_MODAL);
+		cadProduto.setScene(scene2);
+		cadProduto.centerOnScreen();
+		cadProduto.showAndWait();
+	}
+	
+public static void main (String[] args)		{
+	 
+	launch(args);
+	
 }
+		
+		
+		
+	}

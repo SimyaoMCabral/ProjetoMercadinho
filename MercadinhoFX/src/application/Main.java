@@ -93,6 +93,18 @@ public class Main extends Application {
 		stage.show();
 	}
 	
+	public static void TelaRelatorioVenda() throws IOException {
+		FXMLLoader fxmlRelatorioVenda = new FXMLLoader();//nesse método consigo fazer modificações
+		fxmlRelatorioVenda.setLocation(Main.class.getResource("/view/viewRelatorioVendas.fxml"));
+		Parent TelaRelatorioVenda = fxmlRelatorioVenda.load();
+		main = new Scene(TelaRelatorioVenda);
+		stage.setTitle("Mercadinho - Relatorio de Vendas");
+		stage.setScene(main);
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.show();
+	}
+	
 	private static Stage cadCliente;
 	public static void TelaCadastroClin() throws IOException{
 		FXMLLoader ClienteCadastro = new FXMLLoader();
@@ -121,6 +133,21 @@ public class Main extends Application {
 		cadProduto.setScene(scene2);
 		cadProduto.centerOnScreen();
 		cadProduto.showAndWait();
+	}
+	
+	private static Stage cadVenda;
+	public static void TelaRegistrarVenda() throws IOException{
+		FXMLLoader RegistrarVenda = new FXMLLoader();
+		RegistrarVenda.setLocation(Main.class.getResource("/View/viewRegistrarVenda.fxml"));
+		Parent cadastroVenda = RegistrarVenda.load();
+		Scene scene2 = new Scene(cadastroVenda);
+		
+		cadVenda = new Stage();
+		cadVenda.setTitle("Registrar Venda");
+		cadVenda.initModality(Modality.APPLICATION_MODAL);
+		cadVenda.setScene(scene2);
+		cadVenda.centerOnScreen();
+		cadVenda.showAndWait();
 	}
 	
 public static void main (String[] args)		{

@@ -190,12 +190,13 @@ public class controllerRelatorioClientes implements Initializable{
     }
 
     @FXML
-    void actionRegistrarVenda(ActionEvent event) {
-
+    void actionRegistrarVenda(ActionEvent event) throws IOException {
+    	Main.TelaRegistrarVenda();
+    	
     }
 
     @FXML
-    void actionSair(ActionEvent event) throws IOException {
+    void actionSair(ActionEvent event) throws IOException  {
 
     	Alert msg = new Alert(AlertType.CONFIRMATION);
     	msg.setHeaderText("Sair do sistema");
@@ -211,7 +212,8 @@ public class controllerRelatorioClientes implements Initializable{
     }
 
     @FXML
-    void actionVenda(ActionEvent event) {
+    void actionVenda(ActionEvent event) throws IOException {
+    	Main.TelaRelatorioVenda();
 
     }
 

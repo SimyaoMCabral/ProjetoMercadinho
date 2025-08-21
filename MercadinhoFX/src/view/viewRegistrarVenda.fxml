@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="640.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerRegistrarVenda">
+   <children>
+      <Pane layoutX="1.0" layoutY="1.0" prefHeight="638.0" prefWidth="166.0" style="-fx-background-color: #120a8f;" />
+      <Line endX="760.2000122070312" layoutX="115.0" layoutY="91.0" startX="100.4000244140625" startY="7.62939453125E-6" stroke="#693657" strokeWidth="3.0">
+         <effect>
+            <DropShadow height="5.0" radius="2.0" width="5.0" />
+         </effect>
+      </Line>
+      <TextField fx:id="txtNome" layoutX="214.0" layoutY="44.0" onKeyPressed="#actionCPFType" onKeyTyped="#actionCPFType" onMouseClicked="#actionCPFClick" prefHeight="30.0" prefWidth="395.0" promptText="Ex: Capitão Jack Sparrow" style="-fx-background-radius: 15;">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </TextField>
+      <Text layoutX="223.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="226.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produto">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtProduto" layoutX="218.0" layoutY="221.0" prefHeight="30.0" prefWidth="430.0" promptText="Ex: Navio" style="-fx-background-radius: 15;">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </TextField>
+      <Text layoutX="361.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo UN">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="696.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF (Sem pontos)">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtCpf" layoutX="684.0" layoutY="46.0" prefHeight="30.0" prefWidth="190.0" promptText="**********" style="-fx-background-radius: 15;">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </TextField>
+      <Text layoutX="780.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total da Compra">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="txtTipoUn" layoutX="345.0" layoutY="308.0" prefHeight="31.0" prefWidth="90.0" style="-fx-background-radius: 10;">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </ChoiceBox>
+      <Text layoutX="240.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QTD.">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtQTD" layoutX="224.0" layoutY="309.0" prefHeight="30.0" prefWidth="75.0" promptText="0" style="-fx-background-radius: 15;">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </TextField>
+      <Button fx:id="btRegistrar" layoutX="582.0" layoutY="572.0" mnemonicParsing="false" onAction="#actionRegistrar" prefHeight="39.0" prefWidth="124.0" style="-fx-background-color: #09D598; -fx-background-radius: 5;" text="Registrar">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Downloads/List.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="14.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </Button>
+      <Button fx:id="btCancelar" layoutX="758.0" layoutY="572.0" mnemonicParsing="false" onAction="#actionCancelar" prefHeight="39.0" prefWidth="124.0" style="-fx-background-color: EE3761; -fx-background-radius: 5;" text="Cancelar">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Downloads/Lixeira.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="13.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </Button>
+      <Text layoutX="228.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendedor">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtVendedor" layoutX="215.0" layoutY="132.0" maxHeight="30.0" maxWidth="395.0" prefHeight="30.0" prefWidth="395.0" promptText="Ex: Gandalf cinzento" style="-fx-background-radius: 15;">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </TextField>
+      <Line endX="760.2000122070312" layoutX="110.0" layoutY="177.0" startX="100.4000244140625" startY="7.62939453125E-6" stroke="#693657" strokeWidth="3.0">
+         <effect>
+            <DropShadow height="5.0" radius="2.0" width="5.0" />
+         </effect>
+      </Line>
+      <Button fx:id="btAdicionar" layoutX="726.0" layoutY="218.0" mnemonicParsing="false" onAction="#actionAdicionar" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: #00ff00; -fx-background-radius: 5;" text="Adicionar">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Downloads/Adicionar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="14.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </Button>
+      <TextField fx:id="txtPrecoUn" layoutX="485.0" layoutY="308.0" prefHeight="30.0" prefWidth="75.0" promptText="R$ 0,00" style="-fx-background-radius: 15;">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </TextField>
+      <Text layoutX="492.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço UN">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtDesconto" layoutX="609.0" layoutY="308.0" prefHeight="30.0" prefWidth="75.0" promptText="0%" style="-fx-background-radius: 15;">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </TextField>
+      <Text layoutX="603.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desconto (%)">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="txtFormaPGTO" layoutX="739.0" layoutY="308.0" prefHeight="31.0" prefWidth="90.0" style="-fx-background-radius: 10;">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
+         </effect>
+      </ChoiceBox>
+      <Text layoutX="734.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forma de PGTO.">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtTotalCompra" layoutX="801.0" layoutY="478.0" prefHeight="50.0" prefWidth="94.0" promptText="R$ 0,00" style="-fx-background-radius: 5;">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="2.0" />
+         </effect>
+      </TextField>
+      <TableView fx:id="tableRegistrarVenda" layoutX="198.0" layoutY="363.0" prefHeight="198.0" prefWidth="570.0">
+        <columns>
+          <TableColumn fx:id="columnIdRegVenda" prefWidth="27.199981689453125" />
+          <TableColumn fx:id="columnNomeProduto" prefWidth="205.6000518798828" text="Nome do Produto" />
+            <TableColumn fx:id="columnPrecoUn" prefWidth="80.79998779296875" text="Preço Un." />
+            <TableColumn fx:id="columnTipoUn" prefWidth="84.0" text="Tipo Un." />
+            <TableColumn fx:id="columnQuantidade" prefWidth="87.2000732421875" text="Quantidade" />
+            <TableColumn fx:id="columnPrecoTotal" prefWidth="88.0" text="Preço Total" />
+        </columns>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" offsetY="2.0" />
+         </effect>
+      </TableView>
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>

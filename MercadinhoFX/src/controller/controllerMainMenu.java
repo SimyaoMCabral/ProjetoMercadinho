@@ -113,7 +113,8 @@ public class controllerMainMenu implements Initializable{//está apontando erro 
     }
 
     @FXML
-    void actionRegistrarVenda(ActionEvent event) {
+    void actionRegistrarVenda(ActionEvent event) throws IOException {
+    	Main.TelaRegistrarVenda();
 
     }
 
@@ -133,7 +134,8 @@ public class controllerMainMenu implements Initializable{//está apontando erro 
     }
 
     @FXML
-    void actionVenda(ActionEvent event) {
+    void actionVenda(ActionEvent event) throws IOException {
+    	Main.TelaRelatorioVenda();
 
     }
 

@@ -37,7 +37,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="txtProduto" layoutX="218.0" layoutY="221.0" prefHeight="30.0" prefWidth="430.0" promptText="Ex: Navio" style="-fx-background-radius: 15;">
+      <TextField fx:id="txtProduto" layoutX="218.0" layoutY="221.0" onKeyPressed="#actionProdutoType" onKeyTyped="#actionProdutoType" onMouseClicked="#actionProdutoClick" prefHeight="30.0" prefWidth="430.0" promptText="Ex: Navio" style="-fx-background-radius: 15;">
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
          </effect>
@@ -72,7 +72,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="txtQTD" layoutX="224.0" layoutY="309.0" prefHeight="30.0" prefWidth="75.0" promptText="0" style="-fx-background-radius: 15;">
+      <TextField fx:id="txtQTD" layoutX="224.0" layoutY="309.0" onKeyPressed="#actionQuantidade" onKeyTyped="#actionQuantidade" prefHeight="30.0" prefWidth="75.0" promptText="0" style="-fx-background-radius: 15;">
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" offsetY="1.0" />
          </effect>

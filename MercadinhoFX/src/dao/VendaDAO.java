@@ -17,12 +17,12 @@ public class VendaDAO {
 		//COMO É UMA TENTATIVA DE CONEXÃO FOI PRECISO FAZER AS INFROMAÇÕES ABAIXO "TRY CATCH"
 		
 		try {
-			stmt= con.prepareStatement("INSERT INTO Venda values(?, ?, ?, ?, ?)");//a interrogação é um espaço reservado que é reconhecido pelo prepareStatement
+			stmt= con.prepareStatement("INSERT INTO Venda values(?, ?, ?, ?, GETDATE())");//a interrogação é um espaço reservado que é reconhecido pelo prepareStatement
 			stmt.setString(1, venda.getIdCliente());
 			stmt.setString(2, venda.getIdFuncionario());
 			stmt.setString(3, venda.getValorTotal());
 			stmt.setString(4, venda.getQuantTotal());
-			stmt.setString(5, venda.getDataVenda());
+			//Retirei o stmt com DataVenda e interrogação no INSERT e coloquei no lugar o GETDATE()
 			///acima estão na ordem de cada espaço vazio que será preenchido
 			
 			stmt.execute();
@@ -146,6 +146,41 @@ public class VendaDAO {
 					venda.setDataVenda(rs.getString("dataVenda"));
 					
 					vendas.add(venda);
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException("Erro ao ler informações!", e);
+			}finally {
+				ConnectionDatabase.closeConnection(con, stmt, rs);
+			}
+			
+			return vendas;//por enquanto, para não dar erro
+			
+		}
+	    
+	    public ArrayList<Venda> readLastId() {
+			Connection con = ConnectionDatabase.getConnection();
+			PreparedStatement stmt = null;
+			ResultSet rs= null;
+			ArrayList<Venda> vendas = new ArrayList<>();//irá guardar a lista de cliente 
+			
+			try {
+				stmt = con.prepareStatement("SELECT * FROM Venda order by idVenda desc");
+				rs = stmt.executeQuery();
+				// laço de repetição para aparecer a lista de uma vez
+				
+				while(rs.next()) {
+					Venda venda = new Venda();
+					venda.setIdVenda(rs.getString("idVenda"));
+					venda.setIdCliente(rs.getString("idCliente"));
+					venda.setIdFuncionario(rs.getString("idFuncionario"));
+					venda.setValorTotal(rs.getString("valorTotal"));
+					venda.setQuantTotal(rs.getString("quantTotal"));
+					venda.setDataVenda(rs.getString("dataVenda"));
+										
+					vendas.add(venda);
+					
 					
 				}
 			} catch (SQLException e) {

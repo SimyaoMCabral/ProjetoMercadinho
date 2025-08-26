@@ -18,13 +18,14 @@ public class VendaProdutoDAO {
 		//COMO É UMA TENTATIVA DE CONEXÃO FOI PRECISO FAZER AS INFROMAÇÕES ABAIXO "TRY CATCH"
 		
 		try {
-			stmt= con.prepareStatement("INSERT INTO Cliente values(?, ?, ?, ?, ?)");//a interrogação é um espaço reservado que é reconhecido pelo prepareStatement
+			stmt= con.prepareStatement("INSERT INTO VendaProduto values(?, ?, ?, ?, ?)");//a interrogação é um espaço reservado que é reconhecido pelo prepareStatement
 			stmt.setString(1, vendaproduto.getIdVenda());
 			stmt.setString(2, vendaproduto.getIdProduto());
 			stmt.setString(3, vendaproduto.getPrecoUnit());
 			stmt.setString(4, vendaproduto.getQuantindade());
 			stmt.setString(5, vendaproduto.getPrecoTotal());
 			///acima estão na ordem de cada espaço vazio que será preenchido
+			
 			
 			stmt.execute();
 			System.out.println("VendaProduto cadastrado");

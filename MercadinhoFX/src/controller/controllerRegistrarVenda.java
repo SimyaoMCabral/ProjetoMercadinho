@@ -221,6 +221,7 @@ public class controllerRegistrarVenda implements Initializable{
 		txtTotalCompra.setText("0,00");
 		txtTotalCompra.setEditable(false);//para não poder editrar preço total
 		//quer apenas algumas informações
+		//Argumento Para aparecer listaSuspensa*
 		//abaixo serve para aparecer a lista de clientes
 		ClienteDAO clienteDAO = new ClienteDAO();
 		String[] listaClientes = new String[clienteDAO.read().size()];
@@ -230,9 +231,11 @@ public class controllerRegistrarVenda implements Initializable{
 			cliente = arrayClientes.get(i);
 			listaClientes[i] = cliente.getNomeCliente();
 		}
+		
 		//Resolver um problema de complentar o cpf
 		TextFields.bindAutoCompletion(txtNome,listaClientes).setOnAutoCompleted(event -> actionCPFClick(null));
-
+		
+		//Argumento Para aparecer listaSuspensa*
 		//tem que fazer para produto
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 		String[] listaProdutos = new String[produtoDAO.read().size()];
